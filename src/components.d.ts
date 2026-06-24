@@ -6,63 +6,82 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface WmxFileUploader {
         /**
-          * The first name
+          * Comma-separated MIME types and/or extensions (e.g. `image/*,.pdf`).
+          * @default ''
          */
-        "first": string;
+        "accept": string;
         /**
-          * The last name
+          * When true, allows selecting multiple files. When false, holds at most one.
+          * @default false
          */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "multiple": boolean;
     }
 }
+export interface WmxFileUploaderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLWmxFileUploaderElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLWmxFileUploaderElementEventMap {
+        "wmxFilesChanged": { files: File[] };
+        "wmxFileRejected": { files: File[] };
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLWmxFileUploaderElement extends Components.WmxFileUploader, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLWmxFileUploaderElementEventMap>(type: K, listener: (this: HTMLWmxFileUploaderElement, ev: WmxFileUploaderCustomEvent<HTMLWmxFileUploaderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLWmxFileUploaderElementEventMap>(type: K, listener: (this: HTMLWmxFileUploaderElement, ev: WmxFileUploaderCustomEvent<HTMLWmxFileUploaderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLWmxFileUploaderElement: {
+        prototype: HTMLWmxFileUploaderElement;
+        new (): HTMLWmxFileUploaderElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "wmx-file-uploader": HTMLWmxFileUploaderElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface WmxFileUploader {
         /**
-          * The first name
+          * Comma-separated MIME types and/or extensions (e.g. `image/*,.pdf`).
+          * @default ''
          */
-        "first"?: string;
+        "accept"?: string;
         /**
-          * The last name
+          * When true, allows selecting multiple files. When false, holds at most one.
+          * @default false
          */
-        "last"?: string;
+        "multiple"?: boolean;
         /**
-          * The middle name
+          * Emitted when dropped files don't match `accept`.
          */
-        "middle"?: string;
+        "onWmxFileRejected"?: (event: WmxFileUploaderCustomEvent<{ files: File[] }>) => void;
+        /**
+          * Emitted when files are added or removed.
+         */
+        "onWmxFilesChanged"?: (event: WmxFileUploaderCustomEvent<{ files: File[] }>) => void;
     }
 
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
+    interface WmxFileUploaderAttributes {
+        "multiple": boolean;
+        "accept": string;
     }
 
     interface IntrinsicElements {
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "wmx-file-uploader": Omit<WmxFileUploader, keyof WmxFileUploaderAttributes> & { [K in keyof WmxFileUploader & keyof WmxFileUploaderAttributes]?: WmxFileUploader[K] } & { [K in keyof WmxFileUploader & keyof WmxFileUploaderAttributes as `attr:${K}`]?: WmxFileUploaderAttributes[K] } & { [K in keyof WmxFileUploader & keyof WmxFileUploaderAttributes as `prop:${K}`]?: WmxFileUploader[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "wmx-file-uploader": LocalJSX.IntrinsicElements["wmx-file-uploader"] & JSXBase.HTMLAttributes<HTMLWmxFileUploaderElement>;
         }
     }
 }

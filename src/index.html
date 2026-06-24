@@ -1,14 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html dir="ltr" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+    <title>File Uploader Demo</title>
 
     <script type="module" src="/build/files-component.esm.js"></script>
     <script nomodule src="/build/files-component.js"></script>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        padding: 24px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin-bottom: 16px;
+      }
+      .section {
+        margin-bottom: 32px;
+      }
+      .section h2 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        color: #555;
+      }
+      #events {
+        font-size: 0.875rem;
+      }
+      #events li {
+        margin-bottom: 4px;
+      }
+      #events .changed {
+        color: #16a34a;
+      }
+      #events .rejected {
+        color: #dc2626;
+      }
+    </style>
   </head>
   <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+    <h1>wmx-file-uploader Demo</h1>
+
+    <div class="section">
+      <h2>Single file, images only</h2>
+      <wmx-file-uploader id="uploader-single" accept="image/*"></wmx-file-uploader>
+    </div>
+
+    <div class="section">
+      <h2>Multiple files, images and PDFs</h2>
+      <wmx-file-uploader id="uploader-multi" multiple accept="image/*,.pdf"></wmx-file-uploader>
+    </div>
+
+    <div class="section">
+      <h2>Events</h2>
+      <ul id="events"></ul>
+    </div>
+
+    <script>
+      const eventsList = document.getElementById('events');
+
+      function logEvent(source, type, detail) {
+        const li = document.createElement('li');
+        li.className = type === 'wmxFileRejected' ? 'rejected' : 'changed';
+        li.textContent = `[${source}] ${type}: ${JSON.stringify(detail.files.map(f => ({ name: f.name, type: f.type })))}`;
+        eventsList.prepend(li);
+      }
+
+      document.getElementById('uploader-single').addEventListener('wmxFilesChanged', e => {
+        console.log(`wmxFilesChanged`, e);
+        logEvent('single', 'wmxFilesChanged', e.detail);
+      });
+      document.getElementById('uploader-single').addEventListener('wmxFileRejected', e => logEvent('single', 'wmxFileRejected', e.detail));
+
+      document.getElementById('uploader-multi').addEventListener('wmxFilesChanged', e => logEvent('multi', 'wmxFilesChanged', e.detail));
+      document.getElementById('uploader-multi').addEventListener('wmxFileRejected', e => logEvent('multi', 'wmxFileRejected', e.detail));
+    </script>
   </body>
 </html>
