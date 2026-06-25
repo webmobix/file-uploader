@@ -160,3 +160,7 @@ Import the lazy loader for automatic registration of all components, or import i
 ## License
 
 MIT
+
+## Contact
+
+Build by [Webmobix Solutions AG](https://webmobix.com)

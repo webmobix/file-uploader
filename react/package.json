@@ -1,11 +1,13 @@
 {
   "name": "@webmobix/file-uploader-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React wrapper for @webmobix/file-uploader web components",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc -p . --outDir ./dist",
     "clean": "rm -rf dist"
@@ -16,7 +18,7 @@
   },
   "dependencies": {
     "@stencil/react-output-target": "^1.5.3",
-    "@webmobix/file-uploader": "workspace:*"
+    "@webmobix/file-uploader": "workspace:^0.0.1"
   },
   "devDependencies": {
     "react": "^18.0.0",
