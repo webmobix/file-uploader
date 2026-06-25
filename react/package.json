@@ -1,6 +1,6 @@
 {
   "name": "@webmobix/file-uploader-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React wrapper for @webmobix/file-uploader web components",
   "main": "dist/index.js",
   "module": "dist/index.js",
