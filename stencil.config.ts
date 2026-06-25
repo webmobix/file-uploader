@@ -1,7 +1,8 @@
 import { Config } from '@stencil/core';
+import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
-  namespace: 'files-component',
+  namespace: 'file-uploader',
   outputTargets: [
     {
       type: 'dist',
@@ -12,6 +13,10 @@ export const config: Config = {
       customElementsExportBehavior: 'auto-define-custom-elements',
       externalRuntime: false,
     },
+    reactOutputTarget({
+      outDir: './react/src/components/stencil-generated/',
+      stencilPackageName: '@webmobix/file-uploader',
+    }),
     {
       type: 'docs-readme',
     },

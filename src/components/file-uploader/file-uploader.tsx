@@ -157,27 +157,11 @@ export class FileUploader {
 
     return (
       <div class="root">
-        <input
-          type="file"
-          accept={this.accept}
-          multiple={this.multiple}
-          ref={el => (this.fileInput = el)}
-          onChange={this.handleFileInputChange}
-          style={{ display: 'none' }}
-        />
+        <input type="file" accept={this.accept} multiple={this.multiple} ref={el => (this.fileInput = el)} onChange={this.handleFileInputChange} style={{ display: 'none' }} />
         {this.files.map(f => (
           <div class="tile" key={f.id} title={f.file.name}>
-            {f.previewUrl ? (
-              <img class="preview" src={f.previewUrl} alt={f.file.name} />
-            ) : (
-              <div class="placeholder">{f.typeLabel}</div>
-            )}
-            <button
-              type="button"
-              class="remove-btn"
-              aria-label={`Remove ${f.file.name}`}
-              onClick={() => this.removeFile(f.id)}
-            >
+            {f.previewUrl ? <img class="preview" src={f.previewUrl} alt={f.file.name} /> : <div class="placeholder">{f.typeLabel}</div>}
+            <button type="button" class="remove-btn" aria-label={`Remove ${f.file.name}`} onClick={() => this.removeFile(f.id)}>
               X
             </button>
           </div>
@@ -186,7 +170,9 @@ export class FileUploader {
           <div
             class={`drop-zone${this.isDragOver ? ' drag-over' : ''}`}
             onClick={() => this.openFileChooser()}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') this.openFileChooser(); }}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === ' ') this.openFileChooser();
+            }}
             tabIndex={0}
             role="button"
             aria-label="Choose files to upload"
