@@ -1,7 +1,7 @@
 {
   "name": "@webmobix/file-uploader",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "A web component for selecting one or more files for uploading. Has preview for images included.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
