@@ -1,6 +1,6 @@
 {
   "name": "@webmobix/file-uploader-react",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React wrapper for @webmobix/file-uploader web components",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@stencil/react-output-target": "^1.5.3",
-    "@webmobix/file-uploader": "workspace:^0.0.1"
+    "@webmobix/file-uploader": "^0.0.1"
   },
   "devDependencies": {
     "react": "^18.0.0",
